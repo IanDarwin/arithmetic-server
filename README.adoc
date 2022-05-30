@@ -5,12 +5,35 @@ course that I teach (https://learningtree.com/1850).
 Spring Boot provides the ability to build tiny services like this, thanks to
 the Apache Tomcat project's "embeddable Tomcat".
 
-The server uses https on port 8910 with a self-signed certificate.
+Note that as presently configured, your server will be open to access from the world!
+Be sure there are no insecure bits of code for bad actors to exploit.
+And don't publicize it widely, lest you get hit with denial-of-service attacks
+(consider rate-limiting in pf(8) or whatever firewall you use).
+To change this, whack out the line with 0.0.0.0 in application-properties.
 
-When the server is running, you can visit https://localhost:8910/expenses to see the data.
+The server uses https on port 8910 with a self-signed certificate.
+This will NOT work with Chrome!
+With Firefox, you can visit https://hostname:8910/info and accept the Danger warnings.
+With PostMan, which you need in order to submit the POST requests,
+you need to go File->Settings-General->SSL Certificate Verification->Off
+
+(Remember to turn it back on when doing serious work!)
+
+When the server is running, you can visit https://hostname:8910/expenses to see the data.
 
 This style of project would be quite suitable for use as a MicroService, given
 other infrastructure around it.
 
 To start it, you should only need to invoke the 'runserver' script.
 
+The input posted to /arithmetic is a JSON body like
+
+	{ "num1": 67, "num2", 25, "operation", "-" }
+
+The op can be any of
+
+	add subtract multiply divide modulus
+	+ - * / %
+
+The return value is a formatted string, alas, becuase this service has to be compatible with
+one that was set up by somebody else who favored simplicity over generality.

@@ -31,12 +31,24 @@ public class ArithmeticController {
 		return "You got here!";
 	}
 
-	@PostMapping("/expenses")
-	public double compute(@RequestBody MathOp op) throws IOException {
+	@PostMapping("/arithmetic")
+	public String compute(@RequestBody MathOp op) throws IOException {
 		System.out.println("Arithmetic Controller: Got " + op);
 		switch(op.operation) {
-		case "subtract":
-			return op.num1 - op.num2;
+		case "add": case "+":
+			return "The sum is " + (op.num1 + op.num2);
+		case "subtract": case "-":
+			return "The difference is " + (op.num1 - op.num2);
+		case "multiply": case "*":
+			return "The product is " + (op.num1 * op.num2);
+		case "divide": case "/":
+			if (op.num2 == 0)
+				throw new IllegalArgumentException("You cannot divide by zero");
+			return "The quotient is " + (op.num1 / op.num2);
+		case "modulus": case "%":
+			if (op.num2 == 0)
+				throw new IllegalArgumentException("You cannot divide by zero");
+			return "The remainder is " + (op.num1 % op.num2);
 		default:
 			throw new IllegalStateException(op.toString());
 		}
