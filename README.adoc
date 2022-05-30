@@ -1,0 +1,16 @@
+= arithmetic-server
+
+This is a tiny demonstration of arithmetic, used in a MicroServices Architecture
+course that I teach (https://learningtree.com/1850).
+Spring Boot provides the ability to build tiny services like this, thanks to
+the Apache Tomcat project's "embeddable Tomcat".
+
+The server uses https on port 8910 with a self-signed certificate.
+
+When the server is running, you can visit https://localhost:8910/expenses to see the data.
+
+This style of project would be quite suitable for use as a MicroService, given
+other infrastructure around it.
+
+To start it, you should only need to invoke the 'runserver' script.
+
