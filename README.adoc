@@ -7,6 +7,9 @@ the Apache Tomcat project's "embeddable Tomcat".
 
 Note that as presently configured, your server will be open to access from the world!
 Be sure there are no insecure bits of code for bad actors to exploit.
+And don't publicize it widely, lest you get hit with denial-of-service attacks
+(consider rate-limiting in pf(8) or whatever firewall you use).
+To change this, whack out the line with 0.0.0.0 in application-properties.
 
 The server uses https on port 8910 with a self-signed certificate.
 This will NOT work with Chrome!
@@ -23,3 +26,14 @@ other infrastructure around it.
 
 To start it, you should only need to invoke the 'runserver' script.
 
+The input posted to /arithmetic is a JSON body like
+
+	{ "num1": 67, "num2", 25, "operation", "-" }
+
+The op can be any of
+
+	add subtract multiply divide modulus
+	+ - * / %
+
+The return value is a formatted string, alas, becuase this service has to be compatible with
+one that was set up by somebody else who didn't quite get tne need for generality.
