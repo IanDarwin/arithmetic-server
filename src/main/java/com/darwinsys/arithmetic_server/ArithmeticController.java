@@ -43,11 +43,11 @@ public class ArithmeticController {
 			return "The product is " + (op.num1 * op.num2);
 		case "divide": case "/":
 			if (op.num2 == 0)
-				return "You cannot divide by zero";
+				throw new IllegalArgumentException("You cannot divide by zero");
 			return "The quotient is " + (op.num1 / op.num2);
 		case "modulus": case "%":
 			if (op.num2 == 0)
-				return "You cannot divide by zero";
+				throw new IllegalArgumentException("You cannot divide by zero");
 			return "The remainder is " + (op.num1 % op.num2);
 		default:
 			throw new IllegalStateException(op.toString());
