@@ -41,7 +41,7 @@ public class ArithmeticController {
 			return "The difference is " + (op.num1 - op.num2);
 		case "multiply": case "*":
 			return "The product is " + (op.num1 * op.num2);
-		case "add": case "/":
+		case "divide": case "/":
 			if (op.num2 == 0)
 				return "You cannot divide by zero";
 			return "The quotient is " + (op.num1 / op.num2);
