@@ -31,12 +31,12 @@ public class ArithmeticController {
 		return "You got here!";
 	}
 
-	@PostMapping("/expenses")
-	public double compute(@RequestBody MathOp op) throws IOException {
+	@PostMapping("/arithmetic")
+	public String compute(@RequestBody MathOp op) throws IOException {
 		System.out.println("Arithmetic Controller: Got " + op);
 		switch(op.operation) {
 		case "subtract":
-			return op.num1 - op.num2;
+			return "The difference is " + (op.num1 - op.num2);
 		default:
 			throw new IllegalStateException(op.toString());
 		}
