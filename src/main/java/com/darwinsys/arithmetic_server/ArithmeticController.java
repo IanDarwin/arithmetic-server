@@ -35,8 +35,20 @@ public class ArithmeticController {
 	public String compute(@RequestBody MathOp op) throws IOException {
 		System.out.println("Arithmetic Controller: Got " + op);
 		switch(op.operation) {
-		case "subtract":
+		case "add": case "+":
+			return "The sum is " + (op.num1 + op.num2);
+		case "subtract": case "-":
 			return "The difference is " + (op.num1 - op.num2);
+		case "multiply": case "*":
+			return "The product is " + (op.num1 * op.num2);
+		case "add": case "/":
+			if (op.num2 == 0)
+				return "You cannot divide by zero";
+			return "The quotient is " + (op.num1 / op.num2);
+		case "modulus": case "%":
+			if (op.num2 == 0)
+				return "You cannot divide by zero";
+			return "The remainder is " + (op.num1 % op.num2);
 		default:
 			throw new IllegalStateException(op.toString());
 		}
