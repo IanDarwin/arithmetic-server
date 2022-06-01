@@ -36,4 +36,5 @@ The op can be any of
 	+ - * / %
 
 The return value is a formatted string, alas, becuase this service has to be compatible with
-one that was set up by somebody else who favored simplicity over generality.
+one that was set up by to favor simplicity over generality. IRL it would return a numeric value
+that would be formatted into a (language-localized) string for presentation.
