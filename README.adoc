@@ -5,28 +5,42 @@ course that I teach (https://learningtree.com/1850).
 Spring Boot provides the ability to build tiny services like this, thanks to
 the Apache Tomcat project's "embeddable Tomcat".
 
-Note that as presently configured, your server will be open to access from the world!
+This style of project would be quite suitable for use as a MicroService, given
+other infrastructure around it (Docker, Kubernetes, ...).
+
+== Security
+
+Note that as presently configured, if you run this as-is, your server will be open to access from the world!
 Be sure there are no insecure bits of code for bad actors to exploit.
 And don't publicize it widely, lest you get hit with denial-of-service attacks
 (consider rate-limiting in pf(8) or whatever firewall you use).
 To change this, whack out the line with 0.0.0.0 in application-properties.
 
-The server uses https on port 8910 with a self-signed certificate.
+== HTTP or HTTPS?
+
+The server can be configured to uses either plain HTTP or TSL (https) on port 8910, the latter with a self-signed certificate.
+In either case there are issues around poking at it with a browser just to be sure it's running:
+
+* `http`:
+If you run it on the same machine as a real web server that is configured correctly (using HSTS),
+you will not be able to visit it with any browser.
+It will work with `telnet hostname 8910` with `GET / http/1.0` (use `nc` if your system has deleted telnet).
+And it will do its main job, working as a MicroService accessed via REST.
+
+* `https`:
 This will NOT work with Chrome!
-With Firefox, you can visit https://hostname:8910/info and accept the Danger warnings.
+With Firefox, you can visit https://hostname:8910/help and accept the Danger warnings.
 With PostMan, which you need in order to submit the POST requests,
 you need to go File->Settings-General->SSL Certificate Verification->Off
-
 (Remember to turn it back on when doing serious work!)
 
-When the server is running, you can visit https://hostname:8910/expenses to see the data.
-
-This style of project would be quite suitable for use as a MicroService, given
-other infrastructure around it.
+== Usage
 
 To start it, you should only need to invoke the 'runserver' script.
 
-The input posted to /arithmetic is a JSON body like
+To get help, `GET` the `/help` URL.
+
+To use it, `POST` to `/arithmetic` with `Content-type: application/json` and a JSON body like
 
 	{ "num1": 67, "num2", 25, "operation", "-" }
 

@@ -23,10 +23,10 @@ public class ArithmeticController {
 
 	@GetMapping("/")
 	public String index() {
-		return "This is the Spring-based Arithmetic server. GET /info for help\n";
+		return "This is a trivial demo Arithmetic server. GET /help for help\n";
 	}
 
-	@GetMapping("/info")
+	@GetMapping("/help")
 	public String mapping() {
 		return "To use this service, POST to /arithmetic with a JSON body with num1, num2 and operation.\n" +
 			"e.g., { \"num1\" : 67, \"operation\" : \"+\", \"num2\" : 25 }\n";
