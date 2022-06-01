@@ -23,12 +23,13 @@ public class ArithmeticController {
 
 	@GetMapping("/")
 	public String index() {
-		return "This is the Spring-based Arithmetic server";
+		return "This is the Spring-based Arithmetic server. GET /info for help\n";
 	}
 
 	@GetMapping("/info")
 	public String mapping() {
-		return "You got here!";
+		return "To use this service, POST to /arithmetic with a JSON body with num1, num2 and operation.\n" +
+			"e.g., { \"num1\" : 67, \"operation\" : \"+\", \"num2\" : 25 }\n";
 	}
 
 	@PostMapping("/arithmetic")
